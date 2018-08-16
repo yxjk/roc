@@ -1,0 +1,31 @@
+jasypt:
+  encryptor:
+    password: 123456
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+---
+# 开发环境配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:h2:file:d:/h2-db/diip;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: dev
+    password: dev
+
+---
+# test环境配置
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:oracle:thin:@100.11.94.176:1521:rptdb
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: bouser
+    password: ENC(MFnn7bcCJyu10d6ChhvPww==)
+    hikari:
+      maximum-pool-size: 10 # 缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
