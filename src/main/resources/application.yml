@@ -6,14 +6,18 @@ spring:
     active: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
+  datasource:
+    initialization-mode: embedded
+    continue-on-error: true
+
 ---
 # 开发环境配置
 spring:
   profiles: dev
   datasource:
-    url: jdbc:h2:file:d:/h2-db/diip;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:~/diip;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
     driver-class-name: org.h2.Driver
     username: dev
     password: dev
