@@ -27,7 +27,7 @@ public class SystemController {
 
     @PostMapping("/login")
     public Response login(@Validated @RequestBody User model) throws IOException, BizzException {
-        List<User> users = systemService.findUserByUserLogin(model.getUserName());
+        List<User> users = systemService.findUserByUserLogin(model.getUserLogin());
         if (users == null || users.size() == 0) {
             return new Response("F", "用户名不存在", null);
         } else if (!model.getUserPwd().equals(users.get(0).getUserPwd())) {
@@ -46,5 +46,21 @@ public class SystemController {
     public Response userList(@RequestBody JSONObject json) throws IOException, BizzException {
         Page<User> users = systemService.findUsers((User) JSON.parseObject(json.toJSONString(), User.class), ((Pagel) JSON.parseObject(json.toJSONString(), Pagel.class)).getPageableInstance());
         return new Response(users.getContent(), users.getTotalElements());
+    }
+
+    @PostMapping("/saveUser")
+    public Response saveUser(@RequestBody JSONObject json) throws IOException, BizzException {
+        User user = JSON.parseObject(json.toJSONString(), User.class);
+        if(null==user.getUserId()){
+            user.setStatus("S");
+        }
+        systemService.save(user);
+        return new Response();
+    }
+
+    @PostMapping("/deleteUser")
+    public Response deleteUser(@RequestBody JSONObject json) throws IOException, BizzException {
+        systemService.deleteUser(json.get("userId").toString());
+        return new Response();
     }
 }

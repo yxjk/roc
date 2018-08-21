@@ -31,7 +31,15 @@ public class SystemService {
         return menuDao.findByParentId(parentId);
     }
 
-    public Page<User> findUsers(User user,Pageable pageable){
-        return userDao.findAll(Example.of(user),pageable);
+    public Page<User> findUsers(User user, Pageable pageable) {
+        return userDao.findAll(Example.of(user), pageable);
+    }
+
+    public void save(User user) {
+        userDao.save(user);
+    }
+
+    public void deleteUser(String userId) {
+        userDao.deleteById(userId);
     }
 }

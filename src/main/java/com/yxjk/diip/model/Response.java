@@ -16,6 +16,11 @@ public class Response<T> {
 
     private long total;
 
+    public Response() {
+        this.status = "S";
+        this.msg = "操作成功";
+    }
+
     public Response(Object data) {
         this.status = "S";
         this.msg = "操作成功";

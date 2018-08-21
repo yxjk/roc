@@ -9,4 +9,6 @@ import java.util.List;
 public interface UserDao extends JpaRepository<User, String>, QueryByExampleExecutor<User> {
 
     public List<User> findByUserLogin(String userLogin);
+
+    public void deleteByUserId(Long userId);
 }

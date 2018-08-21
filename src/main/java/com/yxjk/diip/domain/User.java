@@ -1,6 +1,7 @@
 package com.yxjk.diip.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,9 +11,9 @@ import java.sql.Timestamp;
 public class User {
     @Id
     @Column(name = "USER_ID", nullable = false)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="UserSequence")
-    @SequenceGenerator(name = "UserSequence", sequenceName = "SEQ_User", allocationSize=1)
-    private Integer userId;
+    @GenericGenerator(name="idGenerator", strategy="uuid")
+    @GeneratedValue(generator="idGenerator")
+    private String userId;
 
     @Column(name = "USER_LOGIN")
     private String userLogin;
