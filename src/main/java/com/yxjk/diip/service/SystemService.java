@@ -23,10 +23,6 @@ public class SystemService {
         return userDao.findByUserLogin(userLogin);
     }
 
-    public List<User> findUserByModel(String userLogin) {
-        return userDao.findByUserLogin(userLogin);
-    }
-
     public List<Menu> findMenuByParentId(String parentId) {
         return menuDao.findByParentId(parentId);
     }
